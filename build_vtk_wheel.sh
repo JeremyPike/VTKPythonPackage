@@ -44,16 +44,16 @@ FLAGS="-DCMAKE_BUILD_TYPE='Release' \
     -DVTK_MODULE_ENABLE_VTK_ParallelCore=YES"
 
 # Ninja build
-cmake -GNinja \
-    $FLAGS \
-    ../vtk
-ninja
+#cmake -GNinja \
+#   $FLAGS \
+#    ../vtk
+#ninja
 
 # Makefile build (if no ninja)
-#cmake -G"Unix Makefiles" \
-#    $FLAGS \
-#    ../vtk
-#make
+cmake -G"Unix Makefiles" \
+    $FLAGS \
+    ../vtk
+make
 
 # If running in a Docker container use Python specifed by $PYTHON variable
 if [ $USING_DOCKER -eq 1 ]

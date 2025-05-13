@@ -1,0 +1,18 @@
+Bootstrap: docker
+From: quay.io/pypa/manylinux2014_aarch64
+
+%environment
+    export USING_DOCKER=1
+    export PYTHON=/opt/python/cp311-cp311/bin/python3
+
+%post
+    echo "Cloning VTKPythonPackage repository"
+    cd /root
+    git clone https://github.com/JeremyPike/VTKPythonPackage.git
+
+    echo "Building VTK wheel"
+    /root/VTKPythonPackage/build_vtk_wheel.sh
+
+%runscript
+    echo "Container is ready, running your command in /"
+    exec "\$@"
